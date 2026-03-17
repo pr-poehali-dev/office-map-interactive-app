@@ -49,9 +49,9 @@ const INCIDENTS: Incident[] = [
 
 // --- Утилиты ---
 const statusColor: Record<NodeStatus, string> = {
-  online: "hsl(142,100%,50%)",
-  warning: "hsl(35,100%,55%)",
-  offline: "hsl(0,85%,60%)",
+  online: "hsl(142,70%,45%)",
+  warning: "hsl(20,90%,55%)",
+  offline: "hsl(350,90%,58%)",
 };
 const statusLabel: Record<NodeStatus, string> = {
   online: "В сети",
@@ -164,7 +164,7 @@ function NetworkMap({ nodes, selected, onSelect }: {
 
             {/* Ореол выбранного */}
             {isSelected && (
-              <circle cx={x} cy={y} r={r + 10} fill="none" stroke="hsl(185,100%,50%)" strokeWidth="1.5" opacity="0.5">
+              <circle cx={x} cy={y} r={r + 10} fill="none" stroke="hsl(350,85%,55%)" strokeWidth="1.5" opacity="0.5">
                 <animate attributeName="r" values={`${r + 8};${r + 15};${r + 8}`} dur="1.5s" repeatCount="indefinite" />
                 <animate attributeName="opacity" values="0.5;0.15;0.5" dur="1.5s" repeatCount="indefinite" />
               </circle>
@@ -173,8 +173,8 @@ function NetworkMap({ nodes, selected, onSelect }: {
             {/* Основной круг */}
             <circle
               cx={x} cy={y} r={r}
-              fill={isSelected ? "hsla(185,100%,50%,0.1)" : "hsla(220,18%,9%,0.95)"}
-              stroke={isSelected ? "hsl(185,100%,50%)" : color}
+              fill={isSelected ? "hsla(350,85%,55%,0.12)" : "hsla(0,12%,8%,0.95)"}
+              stroke={isSelected ? "hsl(350,85%,55%)" : color}
               strokeWidth={isSelected ? 2.5 : 1.5}
               filter={`url(#${glowId})`}
             />
@@ -185,7 +185,7 @@ function NetworkMap({ nodes, selected, onSelect }: {
               textAnchor="middle"
               dominantBaseline="middle"
               fontSize={13}
-              fill={isSelected ? "hsl(185,100%,50%)" : color}
+              fill={isSelected ? "hsl(350,85%,55%)" : color}
               fontFamily="sans-serif"
             >
               {typeEmoji[node.type]}
@@ -199,7 +199,7 @@ function NetworkMap({ nodes, selected, onSelect }: {
               x={x} y={y + r + 13}
               textAnchor="middle"
               fontSize="9.5"
-              fill={isSelected ? "hsl(185,100%,50%)" : "hsla(210,40%,85%,0.9)"}
+              fill={isSelected ? "hsl(350,85%,55%)" : "hsla(10,20%,85%,0.9)"}
               fontFamily="'Golos Text', sans-serif"
               fontWeight={isSelected ? "700" : "400"}
             >
@@ -211,7 +211,7 @@ function NetworkMap({ nodes, selected, onSelect }: {
               x={x} y={y + r + 24}
               textAnchor="middle"
               fontSize="8"
-              fill={node.load > 80 ? "hsl(0,85%,60%)" : node.load > 60 ? "hsl(35,100%,55%)" : "hsl(185,100%,50%)"}
+              fill={node.load > 80 ? "hsl(350,90%,58%)" : node.load > 60 ? "hsl(20,90%,55%)" : "hsl(142,70%,45%)"}
               fontFamily="'JetBrains Mono', monospace"
             >
               {node.status === "offline" ? "OFFLINE" : `${Math.round(node.load)}%`}
@@ -257,7 +257,7 @@ function NodeDetail({ node, onClose }: { node: NetworkNode; onClose: () => void 
             <span className="text-muted-foreground">Загрузка CPU</span>
             <span
               className="font-mono-jet font-semibold"
-              style={{ color: node.load > 80 ? "hsl(0,85%,60%)" : node.load > 60 ? "hsl(35,100%,55%)" : "hsl(142,100%,50%)" }}
+              style={{ color: node.load > 80 ? "hsl(350,90%,58%)" : node.load > 60 ? "hsl(20,90%,55%)" : "hsl(142,70%,45%)" }}
             >
               {Math.round(node.load)}%
             </span>
@@ -267,8 +267,8 @@ function NodeDetail({ node, onClose }: { node: NetworkNode; onClose: () => void 
               className="h-full rounded-full transition-all duration-700"
               style={{
                 width: `${node.load}%`,
-                background: node.load > 80 ? "hsl(0,85%,60%)" : node.load > 60 ? "hsl(35,100%,55%)" : "hsl(185,100%,50%)",
-                boxShadow: `0 0 8px ${node.load > 80 ? "hsl(0,85%,60%)" : node.load > 60 ? "hsl(35,100%,55%)" : "hsl(185,100%,50%)"}`,
+                background: node.load > 80 ? "hsl(350,90%,58%)" : node.load > 60 ? "hsl(20,90%,55%)" : "hsl(350,85%,55%)",
+                boxShadow: `0 0 8px ${node.load > 80 ? "hsl(350,90%,58%)" : node.load > 60 ? "hsl(20,90%,55%)" : "hsl(350,85%,55%)"}`,
               }}
             />
           </div>
@@ -305,10 +305,10 @@ function AnalyticsTab({ nodes }: { nodes: NetworkNode[] }) {
     <div className="space-y-3 animate-fade-in">
       <div className="grid grid-cols-2 gap-2">
         {[
-          { label: "В сети", value: nodes.filter(n => n.status === "online").length, color: "hsl(142,100%,50%)", icon: "CheckCircle2" },
-          { label: "Предупр.", value: nodes.filter(n => n.status === "warning").length, color: "hsl(35,100%,55%)", icon: "AlertTriangle" },
-          { label: "Недоступно", value: nodes.filter(n => n.status === "offline").length, color: "hsl(0,85%,60%)", icon: "XCircle" },
-          { label: "Ср. нагрузка", value: `${avgLoad}%`, color: "hsl(185,100%,50%)", icon: "Activity" },
+          { label: "В сети", value: nodes.filter(n => n.status === "online").length, color: "hsl(142,70%,45%)", icon: "CheckCircle2" },
+          { label: "Предупр.", value: nodes.filter(n => n.status === "warning").length, color: "hsl(20,90%,55%)", icon: "AlertTriangle" },
+          { label: "Недоступно", value: nodes.filter(n => n.status === "offline").length, color: "hsl(350,90%,58%)", icon: "XCircle" },
+          { label: "Ср. нагрузка", value: `${avgLoad}%`, color: "hsl(350,85%,55%)", icon: "Activity" },
         ].map((item) => (
           <div key={item.label} className="glass-card rounded-xl p-3">
             <div className="flex items-center gap-1.5 mb-1">
@@ -330,11 +330,11 @@ function AnalyticsTab({ nodes }: { nodes: NetworkNode[] }) {
                 style={{
                   height: `${bar.value}%`,
                   background: bar.value > 75
-                    ? "linear-gradient(180deg, hsl(0,85%,60%) 0%, hsla(0,85%,60%,0.5) 100%)"
+                    ? "linear-gradient(180deg, hsl(350,90%,58%) 0%, hsla(350,90%,58%,0.5) 100%)"
                     : bar.value > 60
-                    ? "linear-gradient(180deg, hsl(35,100%,55%) 0%, hsla(35,100%,55%,0.5) 100%)"
-                    : "linear-gradient(180deg, hsl(185,100%,50%) 0%, hsla(185,100%,50%,0.4) 100%)",
-                  border: `1px solid ${bar.value > 75 ? "hsl(0,85%,60%)" : bar.value > 60 ? "hsl(35,100%,55%)" : "hsl(185,100%,50%)"}30`,
+                    ? "linear-gradient(180deg, hsl(340,80%,45%) 0%, hsla(340,80%,45%,0.5) 100%)"
+                    : "linear-gradient(180deg, hsl(350,70%,40%) 0%, hsla(350,70%,40%,0.4) 100%)",
+                  border: `1px solid ${bar.value > 75 ? "hsl(350,90%,58%)" : bar.value > 60 ? "hsl(340,80%,45%)" : "hsl(350,70%,40%)"}30`,
                   transition: `height 0.5s ease ${i * 60}ms`,
                 }}
               >
@@ -361,14 +361,14 @@ function AnalyticsTab({ nodes }: { nodes: NetworkNode[] }) {
                     className="h-full rounded-full transition-all duration-700"
                     style={{
                       width: `${node.load}%`,
-                      background: node.load > 80 ? "hsl(0,85%,60%)" : node.load > 60 ? "hsl(35,100%,55%)" : "hsl(185,100%,50%)",
-                      boxShadow: `0 0 6px ${node.load > 80 ? "hsl(0,85%,60%)" : node.load > 60 ? "hsl(35,100%,55%)" : "hsl(185,100%,50%)"}80`,
+                      background: node.load > 80 ? "hsl(350,90%,58%)" : node.load > 60 ? "hsl(20,90%,55%)" : "hsl(350,85%,55%)",
+                      boxShadow: `0 0 6px ${node.load > 80 ? "hsl(350,90%,58%)" : node.load > 60 ? "hsl(20,90%,55%)" : "hsl(350,85%,55%)"}80`,
                     }}
                   />
                 </div>
                 <span
                   className="font-mono-jet text-[10px] w-8 text-right"
-                  style={{ color: node.load > 80 ? "hsl(0,85%,60%)" : node.load > 60 ? "hsl(35,100%,55%)" : "hsl(142,100%,50%)" }}
+                  style={{ color: node.load > 80 ? "hsl(350,90%,58%)" : node.load > 60 ? "hsl(20,90%,55%)" : "hsl(142,70%,45%)" }}
                 >
                   {Math.round(node.load)}%
                 </span>
@@ -382,7 +382,7 @@ function AnalyticsTab({ nodes }: { nodes: NetworkNode[] }) {
 
 // --- Инциденты ---
 function IncidentsTab({ incidents }: { incidents: Incident[] }) {
-  const sevColor = { critical: "hsl(0,85%,60%)", warning: "hsl(35,100%,55%)", info: "hsl(185,100%,50%)" };
+  const sevColor = { critical: "hsl(350,90%,58%)", warning: "hsl(20,90%,55%)", info: "hsl(350,70%,50%)" };
   const sevLabel = { critical: "Критично", warning: "Предупреждение", info: "Инфо" };
   const sevIcon = { critical: "XCircle", warning: "AlertTriangle", info: "Info" };
 
@@ -467,21 +467,21 @@ export default function Index() {
       <header
         className="sticky top-0 z-30 px-4 py-3 flex items-center justify-between"
         style={{
-          background: "hsla(220,20%,6%,0.92)",
+          background: "hsla(0,15%,5%,0.94)",
           backdropFilter: "blur(16px)",
-          borderBottom: "1px solid hsla(185,100%,50%,0.1)",
+          borderBottom: "1px solid hsla(350,60%,40%,0.18)",
         }}
       >
         <div className="flex items-center gap-3">
           <div
             className="w-8 h-8 rounded-lg flex items-center justify-center"
             style={{
-              background: "hsla(185,100%,50%,0.12)",
-              border: "1px solid hsla(185,100%,50%,0.3)",
-              boxShadow: "0 0 12px hsla(185,100%,50%,0.15)",
+              background: "hsla(350,85%,55%,0.14)",
+              border: "1px solid hsla(350,85%,55%,0.35)",
+              boxShadow: "0 0 14px hsla(350,85%,55%,0.18)",
             }}
           >
-            <Icon name="Network" fallback="Globe" size={16} style={{ color: "hsl(185,100%,50%)" }} />
+            <Icon name="Network" fallback="Globe" size={16} style={{ color: "hsl(350,85%,55%)" }} />
           </div>
           <div>
             <p className="font-oswald text-sm font-bold text-white leading-none tracking-wide">АЙТАТ</p>
@@ -492,7 +492,7 @@ export default function Index() {
           <div className="flex items-center gap-1.5">
             <span
               className="w-1.5 h-1.5 rounded-full"
-              style={{ background: "hsl(142,100%,50%)", boxShadow: "0 0 6px hsl(142,100%,50%)" }}
+              style={{ background: "hsl(142,70%,45%)", boxShadow: "0 0 6px hsl(142,70%,45%)" }}
             >
               <style>{`@keyframes blink{0%,100%{opacity:1}50%{opacity:0.4}}`}</style>
             </span>
@@ -505,7 +505,7 @@ export default function Index() {
             {criticalCount > 0 && (
               <span
                 className="absolute top-0 right-0 w-3.5 h-3.5 rounded-full text-[8px] font-bold flex items-center justify-center animate-alert-blink"
-                style={{ background: "hsl(0,85%,60%)", color: "white" }}
+                style={{ background: "hsl(350,90%,55%)", color: "white" }}
               >
                 {criticalCount}
               </span>
@@ -519,19 +519,19 @@ export default function Index() {
         <div
           className="mx-4 mt-3 rounded-xl p-3 flex items-center gap-3 animate-fade-in"
           style={{
-            background: "hsla(0,85%,60%,0.1)",
-            border: "1px solid hsla(0,85%,60%,0.3)",
+            background: "hsla(350,90%,55%,0.1)",
+            border: "1px solid hsla(350,90%,55%,0.35)",
           }}
         >
           <Icon
             name="AlertCircle"
             fallback="AlertCircle"
             size={16}
-            style={{ color: "hsl(0,85%,60%)" }}
+            style={{ color: "hsl(350,90%,58%)" }}
             className="flex-shrink-0 animate-alert-blink"
           />
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-bold" style={{ color: "hsl(0,85%,60%)" }}>Критический сбой!</p>
+            <p className="text-xs font-bold" style={{ color: "hsl(350,90%,58%)" }}>Критический сбой!</p>
             <p className="text-[11px] text-muted-foreground truncate">Веб-сервер недоступен · 14:32</p>
           </div>
           <button onClick={() => setShowNotif(false)} className="text-muted-foreground hover:text-white p-0.5">
@@ -543,9 +543,9 @@ export default function Index() {
       {/* Статус-бар */}
       <div className="mx-4 mt-3 grid grid-cols-3 gap-2">
         {[
-          { label: "В сети", value: nodes.filter(n => n.status === "online").length, color: "hsl(142,100%,50%)" },
-          { label: "Предупр.", value: nodes.filter(n => n.status === "warning").length, color: "hsl(35,100%,55%)" },
-          { label: "Сбои", value: nodes.filter(n => n.status === "offline").length, color: "hsl(0,85%,60%)" },
+          { label: "В сети", value: nodes.filter(n => n.status === "online").length, color: "hsl(142,70%,45%)" },
+          { label: "Предупр.", value: nodes.filter(n => n.status === "warning").length, color: "hsl(20,90%,55%)" },
+          { label: "Сбои", value: nodes.filter(n => n.status === "offline").length, color: "hsl(350,90%,58%)" },
         ].map((s) => (
           <div key={s.label} className="glass-card rounded-xl p-2.5 text-center">
             <p className="font-oswald text-2xl font-bold leading-none" style={{ color: s.color, textShadow: `0 0 12px ${s.color}60` }}>
@@ -557,7 +557,7 @@ export default function Index() {
       </div>
 
       {/* Навигация */}
-      <div className="mx-4 mt-3 flex gap-1 p-1 rounded-xl" style={{ background: "hsla(220,15%,10%,0.8)" }}>
+      <div className="mx-4 mt-3 flex gap-1 p-1 rounded-xl" style={{ background: "hsla(0,10%,9%,0.85)" }}>
         {(["map", "analytics", "incidents"] as const).map((t) => {
           const tabs = {
             map: { label: "Карта", icon: "Map" },
@@ -573,12 +573,12 @@ export default function Index() {
               style={
                 isActive
                   ? {
-                      background: "hsla(185,100%,50%,0.15)",
-                      color: "hsl(185,100%,50%)",
-                      border: "1px solid hsla(185,100%,50%,0.25)",
-                      boxShadow: "0 0 12px hsla(185,100%,50%,0.12)",
+                      background: "hsla(350,85%,55%,0.15)",
+                      color: "hsl(350,85%,62%)",
+                      border: "1px solid hsla(350,85%,55%,0.3)",
+                      boxShadow: "0 0 12px hsla(350,85%,55%,0.14)",
                     }
-                  : { color: "hsl(215,20%,50%)", border: "1px solid transparent" }
+                  : { color: "hsl(0,8%,50%)", border: "1px solid transparent" }
               }
             >
               <Icon name={tabs[t].icon} fallback="Circle" size={13} />
@@ -586,7 +586,7 @@ export default function Index() {
               {t === "incidents" && criticalCount > 0 && (
                 <span
                   className="w-4 h-4 rounded-full text-[8px] font-bold flex items-center justify-center"
-                  style={{ background: "hsl(0,85%,60%)", color: "white" }}
+                  style={{ background: "hsl(350,90%,55%)", color: "white" }}
                 >
                   {criticalCount}
                 </span>
@@ -608,7 +608,7 @@ export default function Index() {
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  background: "radial-gradient(ellipse at 50% 20%, hsla(185,100%,50%,0.05) 0%, transparent 60%)",
+                  background: "radial-gradient(ellipse at 50% 20%, hsla(350,85%,55%,0.07) 0%, transparent 60%)",
                 }}
               />
               <div className="flex items-center justify-between mb-2 relative">
@@ -649,9 +649,9 @@ export default function Index() {
                     className="w-full flex items-center gap-3 p-2.5 rounded-xl transition-all text-left"
                     style={{
                       background: selected === node.id
-                        ? "hsla(185,100%,50%,0.08)"
-                        : "hsla(220,15%,11%,0.6)",
-                      border: `1px solid ${selected === node.id ? "hsla(185,100%,50%,0.25)" : "transparent"}`,
+                        ? "hsla(350,85%,55%,0.1)"
+                        : "hsla(0,10%,10%,0.6)",
+                      border: `1px solid ${selected === node.id ? "hsla(350,85%,55%,0.3)" : "transparent"}`,
                     }}
                   >
                     <div
@@ -673,10 +673,10 @@ export default function Index() {
                           className="font-mono-jet text-[10px]"
                           style={{
                             color: node.load > 80
-                              ? "hsl(0,85%,60%)"
+                              ? "hsl(350,90%,58%)"
                               : node.load > 60
-                              ? "hsl(35,100%,55%)"
-                              : "hsl(142,100%,50%)",
+                              ? "hsl(20,90%,55%)"
+                              : "hsl(142,70%,45%)",
                           }}
                         >
                           {Math.round(node.load)}%

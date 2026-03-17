@@ -4,41 +4,41 @@
 
 @layer base {
   :root {
-    --background: 220 20% 6%;
-    --foreground: 210 40% 95%;
+    --background: 0 15% 5%;
+    --foreground: 10 20% 92%;
 
-    --card: 220 18% 9%;
-    --card-foreground: 210 40% 95%;
+    --card: 0 12% 8%;
+    --card-foreground: 10 20% 92%;
 
-    --popover: 220 18% 9%;
-    --popover-foreground: 210 40% 95%;
+    --popover: 0 12% 8%;
+    --popover-foreground: 10 20% 92%;
 
-    --primary: 185 100% 50%;
-    --primary-foreground: 220 20% 6%;
+    --primary: 350 85% 55%;
+    --primary-foreground: 0 15% 5%;
 
-    --secondary: 220 15% 15%;
-    --secondary-foreground: 210 40% 85%;
+    --secondary: 0 10% 13%;
+    --secondary-foreground: 10 20% 80%;
 
-    --muted: 220 15% 12%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 0 10% 11%;
+    --muted-foreground: 0 8% 50%;
 
-    --accent: 270 80% 65%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 340 70% 45%;
+    --accent-foreground: 10 20% 95%;
 
-    --destructive: 0 80% 55%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 90% 50%;
+    --destructive-foreground: 10 20% 98%;
 
-    --border: 220 15% 18%;
-    --input: 220 15% 18%;
-    --ring: 185 100% 50%;
+    --border: 0 12% 16%;
+    --input: 0 12% 16%;
+    --ring: 350 85% 55%;
 
     --radius: 0.75rem;
 
-    --neon-cyan: 185 100% 50%;
-    --neon-green: 142 100% 50%;
-    --neon-orange: 35 100% 55%;
-    --neon-red: 0 85% 60%;
-    --neon-purple: 270 80% 65%;
+    --neon-red: 350 90% 58%;
+    --neon-crimson: 340 80% 45%;
+    --neon-orange: 20 90% 55%;
+    --neon-green: 142 70% 45%;
+    --neon-rose: 5 80% 65%;
   }
 }
 
@@ -52,13 +52,13 @@
     background-image:
       radial-gradient(
         ellipse at 20% 20%,
-        hsla(185, 100%, 50%, 0.04) 0%,
-        transparent 50%
+        hsla(350, 85%, 55%, 0.07) 0%,
+        transparent 55%
       ),
       radial-gradient(
         ellipse at 80% 80%,
-        hsla(270, 80%, 65%, 0.04) 0%,
-        transparent 50%
+        hsla(340, 70%, 35%, 0.06) 0%,
+        transparent 55%
       );
   }
 }
@@ -74,56 +74,56 @@
     font-family: "JetBrains Mono", monospace;
   }
 
-  .neon-cyan {
-    color: hsl(var(--neon-cyan));
+  .neon-red {
+    color: hsl(var(--neon-red));
     text-shadow:
-      0 0 10px hsla(185, 100%, 50%, 0.8),
-      0 0 30px hsla(185, 100%, 50%, 0.4);
+      0 0 10px hsla(350, 90%, 58%, 0.8),
+      0 0 30px hsla(350, 90%, 58%, 0.4);
   }
-  .neon-green {
-    color: hsl(var(--neon-green));
+  .neon-crimson {
+    color: hsl(var(--neon-crimson));
   }
   .neon-orange {
     color: hsl(var(--neon-orange));
   }
-  .neon-red {
-    color: hsl(var(--neon-red));
+  .neon-green {
+    color: hsl(var(--neon-green));
   }
-  .neon-purple {
-    color: hsl(var(--neon-purple));
+  .neon-rose {
+    color: hsl(var(--neon-rose));
   }
 
-  .glow-cyan {
+  .glow-red {
     box-shadow:
-      0 0 15px hsla(185, 100%, 50%, 0.3),
-      0 0 40px hsla(185, 100%, 50%, 0.1);
+      0 0 15px hsla(350, 90%, 58%, 0.35),
+      0 0 40px hsla(350, 90%, 58%, 0.12);
+  }
+  .glow-crimson {
+    box-shadow:
+      0 0 15px hsla(340, 80%, 45%, 0.3),
+      0 0 40px hsla(340, 80%, 45%, 0.1);
   }
   .glow-green {
     box-shadow:
-      0 0 15px hsla(142, 100%, 50%, 0.3),
-      0 0 40px hsla(142, 100%, 50%, 0.1);
-  }
-  .glow-red {
-    box-shadow:
-      0 0 15px hsla(0, 85%, 60%, 0.4),
-      0 0 40px hsla(0, 85%, 60%, 0.15);
+      0 0 15px hsla(142, 70%, 45%, 0.3),
+      0 0 40px hsla(142, 70%, 45%, 0.1);
   }
   .glow-orange {
     box-shadow:
-      0 0 15px hsla(35, 100%, 55%, 0.3),
-      0 0 40px hsla(35, 100%, 55%, 0.1);
+      0 0 15px hsla(20, 90%, 55%, 0.3),
+      0 0 40px hsla(20, 90%, 55%, 0.1);
   }
 
   .glass-card {
-    background: hsla(220, 18%, 9%, 0.85);
+    background: hsla(0, 12%, 8%, 0.88);
     backdrop-filter: blur(12px);
-    border: 1px solid hsla(185, 100%, 50%, 0.12);
+    border: 1px solid hsla(350, 60%, 40%, 0.15);
   }
 
   .grid-bg {
     background-image:
-      linear-gradient(hsla(185, 100%, 50%, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, hsla(185, 100%, 50%, 0.04) 1px, transparent 1px);
+      linear-gradient(hsla(350, 70%, 40%, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, hsla(350, 70%, 40%, 0.04) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 }
